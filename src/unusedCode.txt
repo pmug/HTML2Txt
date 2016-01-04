@@ -1,0 +1,30 @@
+from fileHandler.java
+
+// reading file line by line in Java 8
+Files.lines(Paths.get(fileNameString))
+        .forEach(System.out::println); 
+// You can do even better, you can read all lines 
+// trim them and filter out all empty lines 
+// before printing as shown in following example 
+System.out.println("Doing more things than just reading file using Java 8 Streams"); 
+Files.lines(new File("manifest.mf").toPath()) 
+        .map(s -> s.trim()) 
+        .filter(s -> !s.isEmpty()) 
+        .forEach(System.out::println); 
+// You can also filter line using String methods 
+// e.g. print only lines which starts with ZZZ 
+System.out.println("Printing lines which starts with ZZZ" ); 
+Files.lines(Paths.get("build.xml")) 
+        .map(s -> s.trim()) 
+        .filter(s -> s.startsWith("ZZZ")) 
+        .forEach(System.out::println);
+
+
+    Path path = Paths.get("", "");
+    //The stream hence file will also be closed here
+    try(Stream<String> lines = Files.lines(path)){
+        Optional<String> hasPassword = lines.filter(s -> s.contains("password")).findFirst();
+        if(hasPassword.isPresent()){
+            System.out.println(hasPassword.get());
+        }
+    }
